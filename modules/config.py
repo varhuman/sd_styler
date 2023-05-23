@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from utils.file_utils import check_folder
+from .utils.file_utils import check_folder
 
 # Load environment variables from .env file
 load_dotenv()

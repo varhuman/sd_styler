@@ -3,7 +3,7 @@ import modules.utils.file_utils as file_utils
 import json
 from modules.models.api_models import TemplateBaseModel, to_serializable
 from datetime import datetime
-from config import config
+from modules.config import config
 
 work_dir = config.work_dir
 output_dir = config.work_dir

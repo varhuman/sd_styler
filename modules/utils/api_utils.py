@@ -12,8 +12,6 @@ import modules.utils.template_utils as template_utils
 import modules.utils.image_utils as image_utils
 from modules.config import config
 
-ip = "127.0.0.1:7860"
-
 # ... Txt2ImgModel definition ...
 def save_base64_image(base64_data, output_path):
     image_data = base64.b64decode(base64_data)
@@ -21,7 +19,7 @@ def save_base64_image(base64_data, output_path):
     image.save(output_path, "JPEG")
 
 def get_models():
-    url = f"http://{ip}/sdapi/v1/sd-models"
+    url = f"http://{config.ip}/sdapi/v1/sd-models"
     try:
         response = requests.get(url)
     except requests.exceptions.ConnectionError:
@@ -38,7 +36,7 @@ def get_models():
         return []
 
 async def txt2img_post_async(img_name, txt2img_model: Txt2ImgModel, output_folder: str):
-    url = f"http://{ip}/sdapi/v1/txt2img"
+    url = f"http://{config.ip}/sdapi/v1/txt2img"
 
     data = json.dumps(txt2img_model.dict(), default=lambda o: o.__dict__)
 
@@ -69,7 +67,7 @@ async def txt2img_post_async(img_name, txt2img_model: Txt2ImgModel, output_folde
             return False, f"Request failed with status code {response.status_code}: {response.text}"
 
 async def img2img_post_async(img_name, img2img_model: Img2ImgModel, output_folder: str):
-    url = f"http://{ip}/sdapi/v1/img2img"
+    url = f"http://{config.ip}/sdapi/v1/img2img"
 
     data = json.dumps(img2img_model.custom_to_dict(), default=lambda o: o.__dict__)
 
